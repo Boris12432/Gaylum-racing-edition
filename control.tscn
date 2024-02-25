@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://iqvpgd0616v4"]
+
+[ext_resource type="Script" path="res://control.gd" id="1_05v3o"]
+[ext_resource type="PackedScene" uid="uid://ci52bv1m15cbs" path="res://cars/Doge.tscn" id="2_v7nk3"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 352.0
+offset_top = 162.0
+offset_right = 923.0
+offset_bottom = 519.0
+script = ExtResource("1_05v3o")
+player_scene = ExtResource("2_v7nk3")
+
+[node name="host" type="Button" parent="."]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 205.0
+offset_right = 828.0
+offset_bottom = 266.0
+text = "Host"
+flat = true
+
+[node name="join" type="Button" parent="."]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 330.0
+offset_right = 823.0
+offset_bottom = 389.0
+text = "Join"
+flat = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://cars/camera/camera_3d.tscn", "res://cars/Doge.tscn", "res://cars/BaseCar.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="join" to="." method="_on_join_pressed"]

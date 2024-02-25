@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://calw41c1rq5ny"]
+
+[ext_resource type="Script" path="res://Menu/Menuo.gd" id="1_dbs1v"]
+
+[node name="Menuo" type="Node2D"]
+visible = false
+script = ExtResource("1_dbs1v")
+
+[node name="Back" type="Button" parent="."]
+offset_left = -7.0
+offset_top = 85.0
+offset_right = 171.0
+offset_bottom = 122.0
+theme_override_colors/font_color = Color(0, 0.729412, 1, 0.85098)
+text = "Back to menu"
+flat = true
+
+[node name="Button2" type="Button" parent="."]
+offset_left = -6.0
+offset_top = 40.0
+offset_right = 172.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0, 0.729412, 1, 0.85098)
+text = "Setting"
+flat = true
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
