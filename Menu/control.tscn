@@ -31,10 +31,6 @@ offset_bottom = 389.0
 text = "Join"
 flat = true
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://cars/Doge.tscn")
-spawn_path = NodePath("..")
-
 [node name="Start" type="Button" parent="."]
 layout_mode = 0
 offset_left = 572.0
@@ -43,6 +39,10 @@ offset_right = 758.0
 offset_bottom = 132.0
 text = "Start"
 flat = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://cars/Doge.tscn")
+spawn_path = NodePath("..")
 
 [connection signal="pressed" from="host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="join" to="." method="_on_join_pressed"]

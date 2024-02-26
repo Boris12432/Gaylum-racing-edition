@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://8sl5gmdd6o6w" path="res://cars/camera/camera_3d.tscn" id="2_5wm5h"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mm2gk"]
-size = Vector3(1.9717, 1, 2.08592)
+size = Vector3(1.9717, 1, 0.798091)
 
 [sub_resource type="LabelSettings" id="LabelSettings_yc8e5"]
 font_size = 32
@@ -13,7 +13,6 @@ font_size = 32
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.1, 0)
 script = ExtResource("1_iqrfq")
-STEER_LIMIT = 0.8
 engine_force_value = 100
 
 [node name="wheal0" type="VehicleWheel3D" parent="."]
@@ -91,4 +90,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2149, 4.76837e-07)
 
 [node name="Camera3D" parent="look" instance=ExtResource("2_5wm5h")]
 transform = Transform3D(1, 0, 0, 0, 0.974347, 0.225053, 0, -0.225053, 0.974347, 0, 1.97324, 6.19962)
-target_distance = 101

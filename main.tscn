@@ -1,10 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://drxt10pv7hq1j"]
+[gd_scene load_steps=18 format=3 uid="uid://drxt10pv7hq1j"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_43uib"]
-[ext_resource type="Texture2D" uid="uid://cpwiyoo7664vj" path="res://cars/Models/texture_10.png" id="2_4uho4"]
-[ext_resource type="PackedScene" uid="uid://iqvpgd0616v4" path="res://control.tscn" id="3_q1esb"]
+[ext_resource type="Texture2D" path="res://images.jpg" id="2_wfgao"]
+[ext_resource type="PackedScene" uid="uid://iqvpgd0616v4" path="res://Menu/control.tscn" id="3_q1esb"]
 [ext_resource type="PackedScene" uid="uid://calw41c1rq5ny" path="res://Menu/Menuo.tscn" id="4_yv4uq"]
 [ext_resource type="Script" path="res://Control2.gd" id="5_n5byn"]
+[ext_resource type="AudioStream" uid="uid://bebdl6lv6qc76" path="res://cars/camera/Static-X - All in Wait.mp3" id="6_l5bvu"]
+[ext_resource type="AudioStream" uid="uid://brljsspokvg2c" path="res://cars/camera/System Of A Down - Aerials (1).mp3" id="7_hjlf8"]
+[ext_resource type="AudioStream" uid="uid://c4gv5qe0n6w1" path="res://cars/camera/System Of A Down - Sugar.mp3" id="8_lf3at"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b7tlo"]
 sky_top_color = Color(0.419608, 0.54902, 0.619608, 1)
@@ -28,14 +31,51 @@ sdfgi_y_scale = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2da72"]
-albedo_texture = ExtResource("2_4uho4")
+albedo_texture = ExtResource("2_wfgao")
+metallic_specular = 0.24
+metallic_texture_channel = 1
+roughness = 0.84
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 16.0
 uv1_triplanar = true
+
+[sub_resource type="Shader" id="Shader_yugxn"]
+code = "shader_type spatial;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the material.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xve23"]
+render_priority = 0
+shader = SubResource("Shader_yugxn")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1ypv7"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_5jeqt"]
 radial_segments = 20
 rings = 1
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5i3x1"]
+playback_mode = 1
+streams_count = 3
+stream_0/stream = ExtResource("6_l5bvu")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("7_hjlf8")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("8_lf3at")
+stream_2/weight = 1.0
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_43uib")
@@ -58,6 +98,7 @@ size = Vector3(7.59973, 0.135742, 10.8715)
 
 [node name="box2" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 2.55802, 0, 0, 0, 1, -4.09722, 1.32642, 0)
+material_overlay = SubResource("ShaderMaterial_xve23")
 size = Vector3(1, 1, 10.8715)
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="CSGCombiner3D"]
@@ -131,8 +172,6 @@ size = Vector3(1, 1, 12.5526)
 transform = Transform3D(0.996837, 0.0794684, 0, -0.0794684, 0.996837, 0, 0, 0, 1, 0.721357, 0.652523, 0.377764)
 size = Vector3(1, 1, 11.543)
 
-[node name="Control" parent="." instance=ExtResource("3_q1esb")]
-
 [node name="Menuo" parent="." instance=ExtResource("4_yv4uq")]
 
 [node name="Control2" type="Control" parent="."]
@@ -168,3 +207,10 @@ offset_left = 1.0
 offset_top = 59.0
 offset_right = 114.0
 offset_bottom = 88.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_5i3x1")
+volume_db = 40.755
+autoplay = true
+
+[node name="Control" parent="." instance=ExtResource("3_q1esb")]

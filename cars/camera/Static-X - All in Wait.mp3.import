@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bebdl6lv6qc76"
+path="res://.godot/imported/Static-X - All in Wait.mp3-94a29f38dcd1afcfede81d4d509796ba.mp3str"
+
+[deps]
+
+source_file="res://cars/camera/Static-X - All in Wait.mp3"
+dest_files=["res://.godot/imported/Static-X - All in Wait.mp3-94a29f38dcd1afcfede81d4d509796ba.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
