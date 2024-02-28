@@ -40,22 +40,25 @@ func _physics_process(delta):
 	var fwd_mps = transform.basis.x.x
 	
 	if not is_multiplayer_authority(): return
-	steer_target = Input.get_action_strength("ui_left") - Input.get_action_strength("ui_right")
+	steer_target = Input.get_action_strength("move_left") - Input.get_action_strength("move_right")
 	steer_target += STEER_LIMIT
 	if not is_multiplayer_authority(): return
 	
-	if Input.is_action_pressed("ui_down"):
-	# Increase engine force at low speeds to make the initial acceleration faster.
-
-		if speed < 20 and speed != 0:
-			engine_force = clamp(engine_force_value * 3 / speed, 0, 150)
+	if Input.is_action_pressed("s"):
+		if speed > 20 and  speed != 0:
+			engine_force = speed - 30     # Applying constant braking force
 		else:
-			engine_force = engine_force_value
+			engine_force = 0
+	if not is_multiplayer_authority(): return
+	if Input.is_action_pressed("s") and Input.is_action_pressed("w"):
+		if speed < 20 and  speed != 0:
+			engine_force = clamp(engine_force_value * 5 / speed, 0, 150)
+		else:
+			engine_force -= engine_force_value
 	else:
 		engine_force = 0
-	if not is_multiplayer_authority(): return
 		
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("w"):
 		# Increase engine force at low speeds to make the initial acceleration faster.
 		if fwd_mps >= -1:
 			if speed < 30 and speed != 0:
@@ -63,7 +66,7 @@ func _physics_process(delta):
 			else:
 				engine_force = -engine_force_value
 		else:
-			brake = 1
+			brake = 10
 	else:
 		brake = 0.0
 		
@@ -78,6 +81,17 @@ func _physics_process(delta):
 		$wheal3.wheel_friction_slip=3
 	steering = move_toward(steering, steer_target, STEER_SPEED * delta)
 
+
+	
+	if not is_multiplayer_authority(): return
+
+func _unhandled_input(event):
+	if Input.is_action_pressed("s"):
+		$"SpotLight3D2".visible = true
+		$"SpotLight3D".visible = true
+	else:
+		$"SpotLight3D2".visible = false
+		$"SpotLight3D".visible = false
 
 func traction(speed):
 	apply_central_force(Vector3.DOWN*speed)

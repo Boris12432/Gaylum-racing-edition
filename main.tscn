@@ -1,13 +1,13 @@
 [gd_scene load_steps=18 format=3 uid="uid://drxt10pv7hq1j"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_43uib"]
-[ext_resource type="Texture2D" path="res://images.jpg" id="2_wfgao"]
-[ext_resource type="PackedScene" uid="uid://iqvpgd0616v4" path="res://Menu/control.tscn" id="3_q1esb"]
+[ext_resource type="Texture2D" uid="uid://bqgjr4efurrt0" path="res://images.jpg" id="2_wfgao"]
 [ext_resource type="PackedScene" uid="uid://calw41c1rq5ny" path="res://Menu/Menuo.tscn" id="4_yv4uq"]
 [ext_resource type="Script" path="res://Control2.gd" id="5_n5byn"]
 [ext_resource type="AudioStream" uid="uid://bebdl6lv6qc76" path="res://cars/camera/Static-X - All in Wait.mp3" id="6_l5bvu"]
 [ext_resource type="AudioStream" uid="uid://brljsspokvg2c" path="res://cars/camera/System Of A Down - Aerials (1).mp3" id="7_hjlf8"]
 [ext_resource type="AudioStream" uid="uid://c4gv5qe0n6w1" path="res://cars/camera/System Of A Down - Sugar.mp3" id="8_lf3at"]
+[ext_resource type="PackedScene" uid="uid://iqvpgd0616v4" path="res://Menu/control.tscn" id="9_qslus"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b7tlo"]
 sky_top_color = Color(0.419608, 0.54902, 0.619608, 1)
@@ -89,6 +89,7 @@ shadow_enabled = true
 directional_shadow_max_distance = 200.0
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+transform = Transform3D(2.45477, 0, 0, 0, 1, 0, 0, 0, 1.21289, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_2da72")
 use_collision = true
 
@@ -174,6 +175,24 @@ size = Vector3(1, 1, 11.543)
 
 [node name="Menuo" parent="." instance=ExtResource("4_yv4uq")]
 
+[node name="Back2" type="Button" parent="Menuo"]
+offset_left = -7.0
+offset_top = 85.0
+offset_right = 171.0
+offset_bottom = 122.0
+theme_override_colors/font_color = Color(0, 0.729412, 1, 0.85098)
+text = "Back to menu"
+flat = true
+
+[node name="Button3" type="Button" parent="Menuo"]
+offset_left = -6.0
+offset_top = 40.0
+offset_right = 172.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0, 0.729412, 1, 0.85098)
+text = "Setting"
+flat = true
+
 [node name="Control2" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -213,4 +232,7 @@ stream = SubResource("AudioStreamRandomizer_5i3x1")
 volume_db = 40.755
 autoplay = true
 
-[node name="Control" parent="." instance=ExtResource("3_q1esb")]
+[node name="Control3" parent="." instance=ExtResource("9_qslus")]
+
+[connection signal="pressed" from="Menuo/Back2" to="." method="_on_back_2_pressed"]
+[connection signal="pressed" from="Menuo/Back2" to="Menuo" method="_on_back_2_pressed"]
