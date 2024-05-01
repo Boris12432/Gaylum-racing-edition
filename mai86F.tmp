@@ -1,16 +1,19 @@
-[gd_scene load_steps=24 format=3 uid="uid://drxt10pv7hq1j"]
+[gd_scene load_steps=23 format=3 uid="uid://drxt10pv7hq1j"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_43uib"]
 [ext_resource type="Texture2D" uid="uid://bqgjr4efurrt0" path="res://images.jpg" id="2_wfgao"]
 [ext_resource type="PackedScene" uid="uid://calw41c1rq5ny" path="res://Menu/Menuo.tscn" id="4_yv4uq"]
 [ext_resource type="Script" path="res://Control2.gd" id="5_n5byn"]
+[ext_resource type="AudioStream" uid="uid://bebdl6lv6qc76" path="res://cars/camera/Static-X - All in Wait.mp3" id="6_l5bvu"]
+[ext_resource type="AudioStream" uid="uid://brljsspokvg2c" path="res://cars/camera/System Of A Down - Aerials (1).mp3" id="7_hjlf8"]
+[ext_resource type="AudioStream" uid="uid://c4gv5qe0n6w1" path="res://cars/camera/System Of A Down - Sugar.mp3" id="8_lf3at"]
 [ext_resource type="Script" path="res://time.gd" id="9_g0xmg"]
 [ext_resource type="PackedScene" uid="uid://iqvpgd0616v4" path="res://Menu/control.tscn" id="9_qslus"]
 [ext_resource type="PackedScene" uid="uid://dula4p824ku00" path="res://cars/node_3d.tscn" id="10_0oebp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b7tlo"]
-sky_top_color = Color(0.341176, 0.454902, 0.517647, 1)
-sky_horizon_color = Color(0.117647, 0.215686, 0.227451, 1)
+sky_top_color = Color(0.235294, 0.32549, 0.376471, 1)
+sky_horizon_color = Color(0.2, 0.215686, 0.219608, 1)
 sky_cover_modulate = Color(0.172549, 0.513726, 0.741176, 1)
 ground_bottom_color = Color(0, 0, 0, 1)
 ground_horizon_color = Color(0.298039, 0.321569, 0.329412, 1)
@@ -33,19 +36,16 @@ ssao_power = 32.7849
 ssil_enabled = true
 sdfgi_y_scale = 2
 glow_enabled = true
-fog_light_color = Color(0.239216, 0.262745, 0.298039, 1)
-fog_light_energy = 0.67
-fog_sky_affect = 0.465
-fog_height = -1024.0
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
-volumetric_fog_emission_energy = 0.0
-volumetric_fog_gi_inject = 0.51
-volumetric_fog_anisotropy = -0.2
-volumetric_fog_length = 462.82
-volumetric_fog_detail_spread = 2.82843
-volumetric_fog_ambient_inject = 0.28
-volumetric_fog_sky_affect = 0.515
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5i3x1"]
+playback_mode = 1
+streams_count = 3
+stream_0/stream = ExtResource("6_l5bvu")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("7_hjlf8")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("8_lf3at")
+stream_2/weight = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eb618"]
 size = Vector3(14.0818, 1, 6.94043)
@@ -94,45 +94,6 @@ shader = SubResource("Shader_yugxn")
 radial_segments = 20
 rings = 1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_if5ws"]
-shading_mode = 2
-diffuse_mode = 2
-albedo_color = Color(0.568627, 0.643137, 1, 1)
-
-[sub_resource type="FogMaterial" id="FogMaterial_uko47"]
-density = 1.8972
-height_falloff = 1.07177e-05
-edge_fade = 0.175599
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x753u"]
-emission_shape_scale = Vector3(400, 1, 300)
-emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
-angle_min = -164.8
-angle_max = -147.5
-spread = 0.0
-angular_velocity_min = -399.04
-angular_velocity_max = -332.74
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yrfcc"]
-shading_mode = 2
-albedo_color = Color(0.113725, 0.12549, 0.180392, 0.160784)
-roughness = 0.0
-emission_energy_multiplier = 16.0
-rim_tint = 0.0
-heightmap_scale = -3.659
-refraction_enabled = true
-refraction_scale = -0.11
-disable_receive_shadows = true
-billboard_mode = 1
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_21i57"]
-lightmap_size_hint = Vector2i(-930, 0)
-material = SubResource("StandardMaterial3D_yrfcc")
-custom_aabb = AABB(123, 3.045, 1.52, 3.39, 1.97, 1.77)
-radius = 0.2
-height = 1.0
-
 [node name="Main" type="Node3D"]
 script = ExtResource("1_43uib")
 
@@ -162,15 +123,6 @@ offset_right = 172.0
 offset_bottom = 77.0
 theme_override_colors/font_color = Color(0, 0.729412, 1, 0.85098)
 text = "Setting"
-flat = true
-
-[node name="Button" type="Button" parent="Menuo"]
-offset_left = 21.0
-offset_top = 128.0
-offset_right = 140.0
-offset_bottom = 164.0
-theme_override_colors/font_color = Color(0, 0.729412, 1, 0.85098)
-text = "Exit"
 flat = true
 
 [node name="Control2" type="Control" parent="."]
@@ -207,6 +159,10 @@ offset_top = 59.0
 offset_right = 114.0
 offset_bottom = 88.0
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_5i3x1")
+volume_db = 40.755
+
 [node name="Control3" parent="." instance=ExtResource("9_qslus")]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
@@ -219,7 +175,7 @@ text = "Mission"
 font_size = 962
 
 [node name="Area3D" type="Area3D" parent="CSGBox3D"]
-transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0.214629, -4.03497)
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0.264459, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/Area3D"]
 transform = Transform3D(0.99991, 0.00887229, -0.0101109, -0.00890871, 0.999954, -0.0035637, 0.0100788, 0.00365344, 0.999943, 0.786194, 1.0158, 3.15)
@@ -274,157 +230,96 @@ shape = SubResource("BoxShape3D_uk6lx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.76837e-07, 0)
 navigation_mesh = SubResource("NavigationMesh_gmu0w")
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
-transform = Transform3D(2.45477, 0, 0, 0, 1, 0, 0, 0, 1.21289, 0, 0, 0)
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D"]
+transform = Transform3D(2.45477, 0, 0, 0, 1, 0, 0, 0, 1.21289, 0, 4.76837e-07, 0)
 material_override = SubResource("StandardMaterial3D_2da72")
 use_collision = true
 
-[node name="box" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="box" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(0.925521, -0.968715, 0, 0.378697, 2.3675, 0, 0, 0, 1, 18.2289, -0.192802, 0)
 size = Vector3(7.59973, 0.135742, 10.8715)
 
-[node name="box2" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="box2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 2.55802, 0, 0, 0, 1, -4.09722, 1.32642, 0)
 material_overlay = SubResource("ShaderMaterial_xve23")
 size = Vector3(1, 1, 10.8715)
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="CSGCombiner3D"]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(82.3645, 0, 0, 0, 82.3645, 0, 0, 0, 82.3645, 0, 0, 0)
 mesh = SubResource("PlaneMesh_1ypv7")
 
-[node name="speedBreaker" type="CSGMesh3D" parent="CSGCombiner3D"]
+[node name="speedBreaker" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(-7.29339e-05, -4.8781, 0, 0.41788, -0.000851437, 0, 0, 0, 1.39042, 0, 0, 24.1159)
 mesh = SubResource("CylinderMesh_5jeqt")
 
-[node name="speedBreaker2" type="CSGMesh3D" parent="CSGCombiner3D"]
+[node name="speedBreaker2" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(-7.29339e-05, -4.8781, 0, 0.41788, -0.000851437, 0, 0, 0, 1.39042, 0, 0, 27.7966)
 mesh = SubResource("CylinderMesh_5jeqt")
 
-[node name="speedBreaker3" type="CSGMesh3D" parent="CSGCombiner3D"]
+[node name="speedBreaker3" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(-7.29339e-05, -4.8781, 0, 0.41788, -0.000851437, 0, 0, 0, 1.39042, 0, 0, 31.6709)
 mesh = SubResource("CylinderMesh_5jeqt")
 
-[node name="speedBreaker4" type="CSGMesh3D" parent="CSGCombiner3D"]
+[node name="speedBreaker4" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(-7.29339e-05, -4.8781, 0, 0.41788, -0.000851437, 0, 0, 0, 1.39042, 0, 0, 35.184)
 mesh = SubResource("CylinderMesh_5jeqt")
 
-[node name="bumps" type="CSGCombiner3D" parent="CSGCombiner3D"]
+[node name="bumps" type="CSGCombiner3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24, 0)
 
-[node name="box3" type="CSGBox3D" parent="CSGCombiner3D/bumps"]
+[node name="box3" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D/bumps"]
 transform = Transform3D(-0.00242604, 0, -0.999997, 0, 2.55802, 0, 0.999997, 0, -0.00242604, 1.59131, 0.169201, -11)
 size = Vector3(0.3, 0.14044, 10.8715)
 
-[node name="box4" type="CSGBox3D" parent="CSGCombiner3D/bumps"]
+[node name="box4" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D/bumps"]
 transform = Transform3D(-0.00242604, 0, -0.999997, 0, 2.55802, 0, 0.999997, 0, -0.00242604, 1.59131, 0.169201, -12.0818)
 size = Vector3(0.3, 0.14044, 10.8715)
 
-[node name="box5" type="CSGBox3D" parent="CSGCombiner3D/bumps"]
+[node name="box5" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D/bumps"]
 transform = Transform3D(-0.00242604, 0, -0.999997, 0, 2.55802, 0, 0.999997, 0, -0.00242604, 1.59131, 0.169201, -13.2459)
 size = Vector3(0.3, 0.14044, 10.8715)
 
-[node name="box6" type="CSGBox3D" parent="CSGCombiner3D/bumps"]
+[node name="box6" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D/bumps"]
 transform = Transform3D(-0.00242604, 0, -0.999997, 0, 2.55802, 0, 0.999997, 0, -0.00242604, 1.59131, 0.169201, -14.3515)
 size = Vector3(0.3, 0.14044, 10.8715)
 
-[node name="box7" type="CSGBox3D" parent="CSGCombiner3D/bumps"]
+[node name="box7" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D/bumps"]
 transform = Transform3D(-0.00242604, 0, -0.999997, 0, 2.55802, 0, 0.999997, 0, -0.00242604, 1.59131, 0.169201, -15.5533)
 size = Vector3(0.3, 0.14044, 10.8715)
 
-[node name="box8" type="CSGBox3D" parent="CSGCombiner3D/bumps"]
+[node name="box8" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D/bumps"]
 transform = Transform3D(-0.00242604, 0, -0.999997, 0, 2.55802, 0, 0.999997, 0, -0.00242604, 1.59131, 0.169201, -16.6351)
 size = Vector3(0.3, 0.14044, 10.8715)
 
-[node name="box9" type="CSGBox3D" parent="CSGCombiner3D/bumps"]
+[node name="box9" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D/bumps"]
 transform = Transform3D(-0.00242604, 0, -0.999997, 0, 2.55802, 0, 0.999997, 0, -0.00242604, 1.59131, 0.169201, -17.7991)
 size = Vector3(0.3, 0.14044, 10.8715)
 
-[node name="box10" type="CSGBox3D" parent="CSGCombiner3D/bumps"]
+[node name="box10" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D/bumps"]
 transform = Transform3D(-0.00242604, 0, -0.999997, 0, 2.55802, 0, 0.999997, 0, -0.00242604, 1.59131, 0.169201, -18.9048)
 size = Vector3(0.3, 0.14044, 10.8715)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(0.728096, 0.685475, 0, -0.685475, 0.728096, 0, 0, 0, 1, 17.7008, -0.58421, -18.858)
 size = Vector3(1, 1, 11.543)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D/CSGBox3D"]
 transform = Transform3D(0.996837, 0.0794684, 0, -0.0794684, 0.996837, 0, 0, 0, 1, 0.721357, 0.652523, 0.377764)
 size = Vector3(1, 1, 11.543)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D/CSGBox3D"]
 transform = Transform3D(0.997299, -0.0734469, 0, 0.0734469, 0.997299, 0, 0, 0, 1, 1.36095, 1.47157, -0.0220833)
 size = Vector3(1, 1, 12.5526)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D/CSGBox3D2"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D/CSGBox3D/CSGBox3D2"]
 transform = Transform3D(0.996837, 0.0794684, 0, -0.0794684, 0.996837, 0, 0, 0, 1, 0.721357, 0.652523, 0.377764)
 size = Vector3(1, 1, 11.543)
 
-[node name="VehicleBody3D" parent="." instance=ExtResource("10_0oebp")]
-visible = false
-
-[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.321774)
-material_override = SubResource("StandardMaterial3D_if5ws")
-use_collision = true
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -202.174, 4.74428, -0.169228)
-layers = 2
-size = Vector3(1.46143, 9.4707, 207.656)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D2/CSGBox3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 403.951, -1.54423, -0.169228)
-size = Vector3(4.22058, 6.60742, 207.656)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D2/CSGBox3D3"]
-transform = Transform3D(-0.00567228, 0, -0.999984, 0, 1, 0, 0.999984, 0, -0.00567228, 152.148, -1.22341, -101.309)
-size = Vector3(9.51075, 9.44995, 645.01)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D2/CSGBox3D3/CSGBox3D4"]
-transform = Transform3D(0.999938, 0, 0.0108907, 0, 1, 0, -0.0108907, 0, 0.999938, 202.193, -1.22341, 3.05176e-05)
-size = Vector3(6.39405, 9.44995, 645.01)
-
-[node name="FogVolume" type="FogVolume" parent="CSGCombiner3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -196.365, 3.38495, 0.152546)
-visible = false
-size = Vector3(16.0385, 7.02817, 205.54)
-material = SubResource("FogMaterial_uko47")
-
-[node name="FogVolume2" type="FogVolume" parent="CSGCombiner3D2"]
-transform = Transform3D(-0.00567228, 0, -0.999984, 0, 1, 0, 0.999984, 0, -0.00567228, -49.0648, -1.62275, -89.1616)
-visible = false
-size = Vector3(16.0385, 7.02817, 638.862)
-material = SubResource("FogMaterial_uko47")
-
-[node name="FogVolume3" type="FogVolume" parent="CSGCombiner3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 198.297, 0.952035, -0.185909)
-visible = false
-size = Vector3(16.0385, 7.02817, 205.54)
-material = SubResource("FogMaterial_uko47")
-
-[node name="FogVolume4" type="FogVolume" parent="CSGCombiner3D2"]
-transform = Transform3D(0.00869163, 0, 0.999962, 0, 1, 0, -0.999963, 0, 0.00869163, -64.0227, 4.87977, 98.0423)
-visible = false
-size = Vector3(16.0385, 7.02817, 635.031)
-material = SubResource("FogMaterial_uko47")
-
-[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0707439, 189.723, 0.205775)
-visible = false
-amount = 15000
-lifetime = 6.0
-preprocess = 0.46
-speed_scale = 3.23
-randomness = 0.76
-fixed_fps = 60
-collision_base_size = 0.0
-visibility_aabb = AABB(-366.727, 9.30837, -333.579, 722.565, 1.93917, 718.652)
-process_material = SubResource("ParticleProcessMaterial_x753u")
-draw_pass_1 = SubResource("CapsuleMesh_21i57")
+[node name="Node3D" parent="." instance=ExtResource("10_0oebp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0167379, -25.6995)
 
 [connection signal="pressed" from="Menuo/Back2" to="." method="_on_back_2_pressed"]
 [connection signal="pressed" from="Menuo/Back2" to="Menuo" method="_on_back_2_pressed"]
-[connection signal="pressed" from="Menuo/Button" to="Menuo" method="_on_button_pressed"]
 [connection signal="body_entered" from="CSGBox3D/Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="CSGBox3D/Area3D" to="." method="_on_area_3d_body_exited"]
 [connection signal="pressed" from="CSGBox3D/Label/Button" to="." method="_on_button_pressed"]

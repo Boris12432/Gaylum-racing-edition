@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://dula4p824ku00"]
+
+[ext_resource type="Script" path="res://VehicleBody3D.gd" id="1_6w5y4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l4xut"]
+size = Vector3(3.00609, 1, 4.74231)
+
+[node name="VehicleBody3D" type="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03462, 0.637932, -18.9471)
+script = ExtResource("1_6w5y4")
+turn_speed = 0.0
+
+[node name="VehicleWheel3D5" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.54038, 0.524132, -17.3965)
+
+[node name="VehicleWheel3D6" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57123, 0.574918, -20.5601)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.993406, 0.971525, -18.9198)
+size = Vector3(2.98682, 1, 4.68274)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.989187, 0.978493, -18.9148)
+shape = SubResource("BoxShape3D_l4xut")
+
+[node name="VehicleWheel3D7" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.58033, 0.544321, -20.4473)
+
+[node name="VehicleWheel3D8" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.49308, 0.524132, -17.3965)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.993406, 1.97046, -19.1264)
+size = Vector3(2.98682, 1, 2.44272)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 0.1
+
+[node name="face" type="Node3D" parent="."]

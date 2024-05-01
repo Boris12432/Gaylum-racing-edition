@@ -17,11 +17,12 @@ func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
 	
 func _ready()-> void:
+	
 	if is_multiplayer_authority():
 		player_camera = $look/Camera3D  # Create a new instance of the camera
 		player_camera.make_current()
 	
-
+	
 	Setting.grav = gravity_scale
 	Setting.mass = mass
 	var pp = Setting.mass
@@ -33,7 +34,11 @@ func _physics_process(delta):
 	if not is_multiplayer_authority(): return
 	var speed = linear_velocity.length()*Engine.get_frames_per_second()*delta
 	traction(speed)
-	$Hud/speed.text=str(round(speed*3.8))+"  KMPH"
+	$Hud/speed.text=str(round(speed*1))+"  KMPH"
+	if speed>3:
+		$AudioStreamPlayer.pitch_scale = $AudioStreamPlayer.pitch_scale-0.005
+	if speed==0 || speed<1:
+		$AudioStreamPlayer.pitch_scale = 0.8
 	if not is_multiplayer_authority(): return
 	
 
@@ -45,20 +50,32 @@ func _physics_process(delta):
 	if not is_multiplayer_authority(): return
 	
 	if Input.is_action_pressed("s"):
-		if speed > 20 and  speed != 0:
-			engine_force = speed - 30     # Applying constant braking force
+		if speed>0 && speed != 0:
+			$AudioStreamPlayer.pitch_scale -= 0.002
+		if -engine_force_value<=0:
+			$AudioStreamPlayer.pitch_scale =  0.7+ speed/12
+		if speed < 20:
+			engine_force = clamp(engine_force_value * 10 / speed, 0, 300)
+			brake = 4
 		else:
-			engine_force = 0
-	if not is_multiplayer_authority(): return
-	if Input.is_action_pressed("s") and Input.is_action_pressed("w"):
-		if speed < 20 and  speed != 0:
-			engine_force = clamp(engine_force_value * 5 / speed, 0, 150)
-		else:
-			engine_force -= engine_force_value
+			engine_force -= engine_force
+		
+		if speed==20:
+			engine_force = 20
 	else:
 		engine_force = 0
-		
+	
+	
+	if not is_multiplayer_authority(): return
 	if Input.is_action_pressed("w"):
+		if speed >= 3 && speed <= 20:
+			$AudioStreamPlayer.pitch_scale = speed/7
+		if speed >= 20 && speed <= 40:
+			$AudioStreamPlayer.pitch_scale = speed/12
+		if speed >= 40 && speed <= 60:
+			$AudioStreamPlayer.pitch_scale = speed/20
+		if speed >= 60 && speed <= 80:
+			$AudioStreamPlayer.pitch_scale = speed/30
 		# Increase engine force at low speeds to make the initial acceleration faster.
 		if fwd_mps >= -1:
 			if speed < 30 and speed != 0:

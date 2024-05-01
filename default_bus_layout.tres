@@ -1,4 +1,14 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://b80vmgnih7u8v"]
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://b80vmgnih7u8v"]
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_opuu7"]
+resource_name = "Chorus"
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_883j2"]
+resource_name = "Reverb"
 
 [resource]
 bus/0/volume_db = -0.328256
+bus/0/effect/0/effect = SubResource("AudioEffectChorus_opuu7")
+bus/0/effect/0/enabled = false
+bus/0/effect/1/effect = SubResource("AudioEffectReverb_883j2")
+bus/0/effect/1/enabled = false

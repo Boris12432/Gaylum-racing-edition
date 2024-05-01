@@ -1,5 +1,4 @@
 extends Node3D
-
 func _unhandled_input(event):
 	if Input.is_action_pressed("esc"):
 		$"Menuo".show()
@@ -16,6 +15,16 @@ func _ready():
 
 func _on_back_2_pressed():
 	$"Menuo".hide()
-	$"AudioStreamPlayer3D".playing = false
+	
 	
 	get_tree().change_scene_to_file("res://Menu/control.tscn")
+
+func _on_area_3d_body_entered(body):
+	$CSGBox3D/Label.show()
+
+func _on_area_3d_body_exited(body):
+	$CSGBox3D/Label.hide()
+
+
+func _on_button_pressed():
+	$CSGBox3D/Label.hide()

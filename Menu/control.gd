@@ -44,3 +44,7 @@ func _on_start_pressed():
 	_add_scene()
 	_add_player()
 
+
+
+func _on_exit_pressed():
+	get_tree().quit()

@@ -15,28 +15,28 @@ player_scene = ExtResource("2_v7nk3")
 
 [node name="host" type="Button" parent="."]
 layout_mode = 0
-offset_left = 500.0
-offset_top = 205.0
-offset_right = 828.0
-offset_bottom = 266.0
+offset_left = 496.0
+offset_top = 230.0
+offset_right = 824.0
+offset_bottom = 291.0
 text = "Host"
 flat = true
 
 [node name="join" type="Button" parent="."]
 layout_mode = 0
-offset_left = 498.0
-offset_top = 330.0
-offset_right = 823.0
-offset_bottom = 389.0
+offset_left = 500.0
+offset_top = 332.0
+offset_right = 825.0
+offset_bottom = 391.0
 text = "Join"
 flat = true
 
 [node name="Start" type="Button" parent="."]
 layout_mode = 0
-offset_left = 572.0
-offset_top = 92.0
-offset_right = 758.0
-offset_bottom = 132.0
+offset_left = 544.0
+offset_top = 138.0
+offset_right = 774.0
+offset_bottom = 178.0
 text = "Start"
 flat = true
 
@@ -44,6 +44,16 @@ flat = true
 _spawnable_scenes = PackedStringArray("res://cars/Doge.tscn")
 spawn_path = NodePath("..")
 
+[node name="Exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 527.0
+offset_top = 423.0
+offset_right = 800.0
+offset_bottom = 483.0
+text = "Exit"
+flat = true
+
 [connection signal="pressed" from="host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

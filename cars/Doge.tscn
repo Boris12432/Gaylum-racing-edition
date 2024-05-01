@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ci52bv1m15cbs"]
+[gd_scene load_steps=9 format=3 uid="uid://ci52bv1m15cbs"]
 
 [ext_resource type="PackedScene" uid="uid://duy0dbkychify" path="res://cars/BaseCar.tscn" id="1_cfkas"]
 [ext_resource type="PackedScene" uid="uid://benmjny2guowm" path="res://cars/Models/Doge/Wheel.glb" id="2_eoiid"]
 [ext_resource type="PackedScene" uid="uid://bty2rpvw2dh0h" path="res://cars/Models/Doge/doge-body.glb" id="3_om8jj"]
+[ext_resource type="AudioStream" uid="uid://bvhsw0022058v" path="res://cars/vw-t4-td-19-2000-dvigatel-na-holostom-hodu-idealnaya-petlya.ogg" id="4_1pssd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n7qdn"]
 radius = 0.291194
@@ -77,6 +78,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0775136, 0, 0)
 [node name="CollisionShape3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0026385, 0.827398, 0.22493)
 
+[node name="Label" parent="Hud" index="1"]
+text = "
+"
+
 [node name="Camera3D" parent="look" index="0"]
 doppler_tracking = 1
 current = false
@@ -118,3 +123,8 @@ visible = false
 light_color = Color(0.552941, 0, 0.211765, 1)
 light_energy = 6.62
 omni_range = 0.102285
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="15"]
+stream = ExtResource("4_1pssd")
+pitch_scale = 0.9
+autoplay = true
